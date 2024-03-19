@@ -22,10 +22,13 @@
 
     #helmchart report.yaml
     do_chart_verifier: true
+    partner_name: "redhat-arkady-test"
+    partner_email: "redhat-arkady-test@redhat.com"
+    github_token_path: "/var/lib/dci-openshift-app-agent/github-token.txt"
+    sandbox_repository: "ansvu/charts"
   
     dci_charts:
-      - name: finalchart
-        chart_file: https://ansvu.github.io/finalchart/finalchart-0.1.4.tgz
+      - chart_file: https://ansvu.github.io/finalchart/finalchart-0.1.4.tgz
         deploy_chart: true
         create_pr: false
 
