@@ -1,0 +1,8 @@
+---
+- name: "Ava Test hook"
+  set_fact:
+    testme: "1-22"
+
+- name: "print debug for testme"
+  debug:
+    msg: "debug: {{ testme }}"

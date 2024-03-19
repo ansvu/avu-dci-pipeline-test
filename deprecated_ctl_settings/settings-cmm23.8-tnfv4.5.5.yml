@@ -1,0 +1,21 @@
+---
+dci_topic: "OCP-4.14"
+dci_name: "ocp-4.14-job"
+dci_configuration: "CMM TNF Test For CMM23.8 TNF v4.5.5"
+dci_tags: ["CMM23.8"]
+do_cnf_cert: true
+dci_openshift_app_image: quay.io/testnetworkfunction/cnf-test-partner:latest
+tnf_log_level: trace
+do_must_gather: false
+check_workload_api: false
+tnf_labels: common,telco,extended
+tnf_config:
+  - namespace: npv-cmm-34
+    targetpodlabels:
+      - app=qa
+    operators_regexp:
+    exclude_connectivity_regexp: ""
+tnf_non_intrusive_only: true
+dci_gits_to_components: []
+test_network_function_version: "v4.5.5"
+...

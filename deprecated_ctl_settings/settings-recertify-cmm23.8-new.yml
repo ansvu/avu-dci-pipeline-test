@@ -1,0 +1,48 @@
+---
+dci_topic: "OCP-4.14"
+dci_name: "Re-certify the CMM23.8 Container Projects Images"
+dci_configuration: "CMM23.8 Recertification Container Projects with same images name"
+preflight_run_health_check: false
+do_must_gather: false
+check_for_existing_projects: true
+organization_id: 13159163
+check_workload_api: false
+dci_config_dirs: [/etc/dci-openshift-agent]
+partner_creds: "/var/lib/dci-openshift-app-agent/demo-auth.json"
+preflight_containers_to_certify:
+  - container_image: "quay.io/nepravee/cmm-alms:CMM23.8.0.0"
+    pyxis_container_identifier: "632abf0a86417c87ac0ffeb5"
+  - container_image: "quay.io/nepravee/cmm-aimctcs:CMM23.8.0.0"
+    pyxis_container_identifier: "632abfa060995529f7f213ec"
+  - container_image: "quay.io/nepravee/cmm-aimlihs:CMM23.8.0.0"
+    pyxis_container_identifier: "632aad6d86417c87ac0ffeb0"
+  - container_image: "quay.io/nepravee/cmm-aimmlis:CMM23.8.0.0"
+    pyxis_container_identifier: "632aa9e886417c87ac0ffeaf"
+  - container_image: "quay.io/nepravee/cmm-aimrcis:CMM23.8.0.0"
+    pyxis_container_identifier: "63e14587dba263c6a18dfe24"
+  - container_image: "quay.io/nepravee/cmm-aimucds:CMM23.8.0.0"
+    pyxis_container_identifier: "63e148ccac5cced0477ff9ec"
+  - container_image: "quay.io/nepravee/cmm-aimpaps:CMM23.8.0.0"
+    pyxis_container_identifier: "632aac32115a58b2a6bbeb1d"
+  - container_image: "quay.io/nepravee/cmm-aimipps:CMM23.8.0.0"
+    pyxis_container_identifier: "632aaccc115a58b2a6bbeb1e"
+  - container_image: "quay.io/nepravee/cmm-aimeems:CMM23.8.0.0"
+    pyxis_container_identifier: "632aaf2160995529f7f213e4"
+  - container_image: "quay.io/nepravee/cmm-aimipds:CMM23.8.0.0"
+    pyxis_container_identifier: "632aaf9a8f072680c79d2250"
+  - container_image: "quay.io/nepravee/cmm-aimdbs:CMM23.8.0.0"
+    pyxis_container_identifier: "632abe8886417c87ac0ffeb4"
+  - container_image: "quay.io/nepravee/cmm-necc:CMM23.8.0.0"
+    pyxis_container_identifier: "6321ea79af88aef859c93131"
+  - container_image: "quay.io/nepravee/cmm-aimcpps:CMM23.8.0.0"
+    pyxis_container_identifier: "632ac01f115a58b2a6bbeb21"
+  - container_image: "quay.io/nepravee/cmm-init:CMM23.8.0.0"
+    pyxis_container_identifier: "632ac0a860995529f7f213ed"
+  - container_image: "quay.io/nepravee/cmm-operator:CMM23.8.0.0"
+    pyxis_container_identifier: "632ac14e60995529f7f213ee"
+  #- container_image: "quay.io/nepravee/cmm-aimfds:CMM23.8.0.0"
+  #  pyxis_container_identifier: "632aabae8f072680c79d224e"
+
+pyxis_apikey_path: "/var/lib/dci-openshift-app-agent/demo-pyxis-apikey.txt"
+dci_gits_to_components: []
+...
