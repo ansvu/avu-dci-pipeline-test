@@ -1,0 +1,77 @@
+---
+- name: certify-oneshot-automation
+  stage: workerload
+  topic: OCP-4.13
+  ansible_playbook: /usr/share/dci-openshift-app-agent/dci-openshift-app-agent.yml
+  ansible_cfg: ~/avu-dci-pipeline-test/pipelines/ansible.cfg
+  ansible_inventory: ~/avu-dci-pipeline-test/inventories/@QUEUE/@RESOURCE-workload.yml
+  dci_credentials: ~/.config/dci-pipeline/dci_credentials.yml
+  ansible_extravars:
+    dci_cache_dir: ~/dci-cache-dir
+    dci_config_dir: ~/avu-dci-pipeline-test
+    dci_openshift_app_ns: testns
+    dci_gits_to_components:
+      - ~/avu-dci-pipeline-test
+    dci_local_log_dir: ~/upload-errors
+    dci_tags: ["oneshot", "preflight", "helmchart", "helmchart-pr"]
+    dci_workarounds: []
+  
+    #docker auth and backend access
+    partner_creds: "/var/lib/dci-openshift-app-agent/demo-auth.json"
+    pyxis_apikey_path: "/var/lib/dci-openshift-app-agent/demo-pyxis-apikey.txt"
+    
+    do_must_gather: false
+    check_workload_api: false
+    dci_openshift_app_ns: oneshot
+
+    #helmchart report.yaml
+    do_chart_verifier: true
+  
+    partner_name: "redhat-arkady-test"
+    partner_email: "redhat-arkady-test@redhat.com"
+    github_token_path: "/var/lib/dci-openshift-app-agent/github-token.txt"
+    sandbox_repository: "ansvu/charts"
+
+    preflight_containers_to_certify:
+      - container_image: "quay.io/avu0/demo4-nginx-ubi9:1-22"
+        create_container_project: true
+        short_description: "I am doing a full-automation e2e auto-publish for following image demo4-nginx-ubi9"
+        pyxis_product_lists:
+          - "65f84bfabe9ac8c80492968a"
+
+    helmchart_to_certify:
+      - repository: "https://github.com/ansvu/finalchart"
+        short_description: "This is a test for one shot automation together with container+chart-verifier+helmchart-pr"
+        chart_name: "finalchart"
+        create_helmchart_project: true
+        pyxis_product_lists:
+          - "639b4bfd27b76af009e324cb"
+
+    dci_charts:
+      - name: finalchart
+        chart_file: https://ansvu.github.io/finalchart/finalchart-0.1.4.tgz
+        deploy_chart: true
+        create_pr: true
+
+    cert_settings:
+      # container
+      auto_publish: true
+      build_categories: "Standalone image"
+      registry_override_instruct: "These are instructions of how to override settings"
+      email_address: "email@example.com"
+      application_categories: "Networking"
+      os_content_type: "Red Hat Universal Base Image (UBI)"
+      privileged: false
+      release_category: "Generally Available"
+      repository_description: "This is a test repository for one-shot automaiton"
+
+      # helmchart
+      github_usernames: "ansvu"
+      long_description: "This is a long 100+ characters description about this sample chart"
+      distribution_method: "undistributed"
+      distribution_instructions: "Instruction how to get this helm-chart"
+
+  use_pevious_topic: true
+  inputs:
+    kubeconfig: kubeconfig_path
+...

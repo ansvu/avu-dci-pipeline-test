@@ -3,39 +3,35 @@
   stage: workload
   topic: OCP-4.13
   ansible_playbook: /usr/share/dci-openshift-app-agent/dci-openshift-app-agent.yml
-  ansible_cfg: ~/avu-pipeline-test/pipelines/ansible.cfg
-  ansible_inventory: ~/avu-pipeline-test/inventories/@QUEUE/@RESOURCE-workload.yml
+  ansible_cfg: ~/avu-dci-pipeline-test/pipelines/ansible.cfg
+  ansible_inventory: ~/avu-dci-pipeline-test/inventories/@QUEUE/@RESOURCE-workload.yml
   dci_credentials: ~/.config/dci-pipeline/dci_credentials.yml
   ansible_extravars:
     dci_cache_dir: ~/dci-cache-dir
-    dci_config_dir: ~/avu-pipeline-test/ocp-workload
-    dci_openshift_app_ns: testns
-    #dci_gits_to_components:
-    #  - ~/avu-pipeline-test
+    dci_config_dir: ~/avu-dci-pipeline-test/ocp-workload
+    dci_gits_to_components:
+      - ~/avu-dci-pipeline-test
     dci_local_log_dir: ~/upload-errors
-    dci_tags: ["openshift-cnf", "cnf", "debug", "test"]  
+    dci_tags: ["openshift-cnf", "cnf", "debug", "create"]  
     dci_workarounds: []
-    partner_creds: "/var/lib/dci-openshift-app-agent/demo-auth.json"
+  
+    #custom settings
     check_for_existing_projects: true
     organization_id: 15451045
     do_must_gather: false
     check_workload_api: false
-    page_size: 480
+    page_size: 200
     pyxis_apikey_path: "/var/lib/dci-openshift-app-agent/demo-pyxis-apikey.txt"
-    cnf_to_certify:
-      - cnf_name: "YingCNF25.0 on OCP4.14"
-        create_cnf_project: true
- 
-    cert_settings:
-       email_address: "me@redhat.com"
 
-    #cert_listings:
-    #  email_address: "me@redhat.com"            
-    #  published: false
-    #  type: "container stack"
-    #  pyxis_product_lists:
-    #    - "639b4bfd27b76af009e324cb"
-    
+    cnf_to_certify:
+      - cnf_name: "YingCNF26.0 on OCP4.14"
+        create_cnf_project: true
+        pyxis_product_lists:
+          - "639b4bfd27b76af009e324cb"
+
+    cert_settings:
+      email_address: "email@example.com"          
+
   use_previous_topic: true
   inputs:
     kubeconfig: kubeconfig_path

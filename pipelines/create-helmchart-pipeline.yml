@@ -3,44 +3,42 @@
   stage: workload
   topic: OCP-4.13
   ansible_playbook: /usr/share/dci-openshift-app-agent/dci-openshift-app-agent.yml
-  ansible_cfg: ~/avu-pipeline-test/pipelines/ansible.cfg
-  ansible_inventory: ~/avu-pipeline-test/inventories/@QUEUE/@RESOURCE-workload.yml
+  ansible_cfg: ~/avu-dci-pipeline-test/pipelines/ansible.cfg
+  ansible_inventory: ~/avu-dci-pipeline-test/inventories/@QUEUE/@RESOURCE-workload.yml
   dci_credentials: ~/.config/dci-pipeline/dci_credentials.yml
   ansible_extravars:
     dci_cache_dir: ~/dci-cache-dir
-    dci_config_dir: ~/avu-pipeline-test/ocp-workload
+    dci_config_dir: ~/avu-dci-pipeline-test/ocp-workload
     dci_openshift_app_ns: testns
-    #dci_gits_to_components:
-    #  - ~/avu-pipeline-test
+    dci_gits_to_components:
+      - ~/avu-dci-pipeline-test
     dci_local_log_dir: ~/upload-errors
-    dci_tags: ["helmchart", "cnf", "debug", "test"]  
+    dci_tags: ["helmchart", "cnf", "debug", "create"]  
     dci_workarounds: []
-    partner_creds: "/var/lib/dci-openshift-app-agent/demo-auth.json"
+    
+    #Custom settings
     check_for_existing_projects: true
     organization_id: 15451045
     do_must_gather: false
     check_workload_api: false
-    page_size: 450
+    page_size: 200
     pyxis_apikey_path: "/var/lib/dci-openshift-app-agent/demo-pyxis-apikey.txt"
+    
     helmchart_to_certify:
       - repository: "https://github.com/ansvu/testchartpr1"
         short_description: "This is a short description testchartprrrrrrrrrrrrrrrr"
         chart_name: "testchartpr1"
         create_helmchart_project: true
+        pyxis_product_lists:
+          - "639b4bfd27b76af009e324cb"
 
     cert_settings:
-      email_address: "me@test.com"
+      email_address: "email@example.com"
       distribution_method: "undistributed"
-      github_usernames: "ansvu"
+      github_usernames: "email"
       application_categories: "Networking"
       long_description: "This is a long description about this sample chart"
       distribution_instructions: "You must go to the unknown to get this helm-chart!"
-
-    cert_listings:
-      published: false
-      type: "container stack"
-      pyxis_product_lists: 
-        - "639b4bfd27b76af009e324cb"
 
   use_previous_topic: true
   inputs:

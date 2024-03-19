@@ -3,15 +3,15 @@
   stage: workerload
   topic: OCP-4.13
   ansible_playbook: /usr/share/dci-openshift-app-agent/dci-openshift-app-agent.yml
-  ansible_cfg: ~/avu-pipeline-test/pipelines/ansible.cfg
-  ansible_inventory: ~/avu-pipeline-test/inventories/@QUEUE/@RESOURCE-workload.yml
+  ansible_cfg: ~/avu-dci-pipeline-test/pipelines/ansible.cfg
+  ansible_inventory: ~/avu-dci-pipeline-test/inventories/@QUEUE/@RESOURCE-workload.yml
   dci_credentials: ~/.config/dci-pipeline/dci_credentials.yml
   ansible_extravars:
     dci_cache_dir: ~/dci-cache-dir
-    dci_config_dir: ~/avu-pipeline-test #~/avu-pipeline-test/ocp-workload
+    dci_config_dir: ~/avu-dci-pipeline-test #~/avu-dci-pipeline-test/ocp-workload
     dci_openshift_app_ns: testns
     dci_gits_to_components:
-      - ~/avu-pipeline-test
+      - ~/avu-dci-pipeline-test
     dci_local_log_dir: ~/upload-errors
     dci_tags: ["preflight", "cnf", "debug"]
 
@@ -49,13 +49,6 @@
        privileged: false
        release_category: "Generally Available"
        repository_description: "This is a test for Demo how to automate to create project,SCAN and update settings"
-
-    #cert_listings:
-    #  published: false
-    #  type: "container stack"
-    #  pyxis_product_lists: 
-    #    - "639b4bifd27b76af009e324cb"
-    #    - "642a2aff90de6580a53c2f66"
 
   use_pevious_topic: true
   inputs:

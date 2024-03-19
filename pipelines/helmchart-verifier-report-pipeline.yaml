@@ -1,0 +1,35 @@
+---
+- name: helmchart-verifier-report
+  stage: workerload
+  topic: OCP-4.13
+  ansible_playbook: /usr/share/dci-openshift-app-agent/dci-openshift-app-agent.yml
+  ansible_cfg: ~/avu-dci-pipeline-test/pipelines/ansible.cfg
+  ansible_inventory: ~/avu-dci-pipeline-test/inventories/@QUEUE/@RESOURCE-workload.yml
+  dci_credentials: ~/.config/dci-pipeline/dci_credentials.yml
+  ansible_extravars:
+    dci_cache_dir: ~/dci-cache-dir
+    dci_config_dir: ~/avu-dci-pipeline-test
+    dci_openshift_app_ns: testns
+    dci_gits_to_components:
+      - ~/avu-dci-pipeline-test
+    dci_local_log_dir: ~/upload-errors
+    dci_tags: ["chart-verifier", "report", "helmchart", "test"]
+    dci_workarounds: []
+  
+    do_must_gather: false
+    check_workload_api: false
+    dci_openshift_app_ns: oneshot
+
+    #helmchart report.yaml
+    do_chart_verifier: true
+  
+    dci_charts:
+      - name: finalchart
+        chart_file: https://ansvu.github.io/finalchart/finalchart-0.1.4.tgz
+        deploy_chart: true
+        create_pr: false
+
+  use_pevious_topic: true
+  inputs:
+    kubeconfig: kubeconfig_path
+...
