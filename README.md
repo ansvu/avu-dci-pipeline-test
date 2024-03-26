@@ -61,3 +61,8 @@ $ KUBECONFIG=$KUBECONFIG dci-pipeline-schedule create-openshift-cnf
 $ dci-pipeline-check https://github.com/redhatci/ansible-collection-redhatci-ocp/pull/213 $KUBECONFIG container-hooks
 ```
 
+# How to run oneshot workflow
+
+```
+$ KUBECONFIG=$KUBECONFIG dci-pipeline-schedule oneshot-container oneshot-helmchart
+```

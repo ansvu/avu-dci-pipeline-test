@@ -1,6 +1,7 @@
 ---
-- name: container-e2e
+- name: oneshot-container
   stage: workload
+  prev_stages: [ocp-upgrade, ocp]
   topic: OCP-4.13
   ansible_playbook: /usr/share/dci-openshift-app-agent/dci-openshift-app-agent.yml
   ansible_cfg: ~/avu-dci-pipeline-test/pipelines/ansible.cfg
@@ -8,40 +9,31 @@
   dci_credentials: ~/.config/dci-pipeline/dci_credentials.yml
   ansible_extravars:
     dci_cache_dir: ~/dci-cache-dir
-    dci_config_dir: ~/avu-dci-pipeline-test #~/avu-dci-pipeline-test/ocp-workload
-    dci_openshift_app_ns: testns
+    dci_config_dir: ~/avu-dci-pipeline-test/ocp-workload
     dci_gits_to_components:
       - ~/avu-dci-pipeline-test
     dci_local_log_dir: ~/upload-errors
-    dci_tags: ["preflight", "cnf", "debug"]
-
+    dci_tags: ["oneshot", "preflight", "step1"]
     dci_workarounds: []
-
-    #custom settings
+  
+    # docker auth and backend access
     partner_creds: "/var/lib/dci-openshift-app-agent/demo-auth.json"
-    check_for_existing_projects: true
-    organization_id: 15451045
-    do_must_gather: false
-    preflight_run_health_check: false
-    check_workload_api: false
-    page_size: 200
     pyxis_apikey_path: "/var/lib/dci-openshift-app-agent/demo-pyxis-apikey.txt"
+    
+    # reduce the job duration
+    do_must_gather: false
+    check_workload_api: false
 
-    certify_image_tag: "1-22"
+    # run preflight check container tests,
+    # create cert project, and submit tests results
     preflight_containers_to_certify:
-      - container_image: "quay.io/avu0/demo1-nginx-ubi9:{{ certify_image_tag }}"
+      - container_image: "quay.io/avu0/demo4-nginx-ubi9:1-22"
         create_container_project: true
-        short_description: "I am doing a full-automation e2e auto-publish for following image demo1-nginx-ubi9"
+        short_description: "I am doing a full-automation e2e auto-publish for following image demo4-nginx-ubi9"
         pyxis_product_lists:
-          - "639b4bfd27b76af009e324cb"
-          - "6397a9d2aea4e1694b0fe1c4"
+          - "65f84bfabe9ac8c80492968a"
 
-      - container_image: "quay.io/avu0/demo3-nginx-ubi9:{{ certify_image_tag }}"
-        create_container_project: true
-        short_description: "I am doing a full-automation e2e auto-publish for following image demo3-nginx-ubi9"
-        pyxis_product_lists:
-          - "639b4bfd27b76af009e324cb"
-
+    # update the cert project for container
     cert_settings:
       # container
       auto_publish: true
@@ -52,8 +44,9 @@
       os_content_type: "Red Hat Universal Base Image (UBI)"
       privileged: false
       release_category: "Generally Available"
-      repository_description: "This is a test repository for one-shot automation"
+      repository_description: "This is a test repository for one-shot automaiton"
 
+  use_previous_topic: true
   inputs:
     kubeconfig: kubeconfig_path
 ...
