@@ -1,7 +1,6 @@
 ---
-- name: oneshot-container
+- name: test-hooks-query
   stage: workload
-  prev_stages: [ocp-upgrade, ocp]
   topic: OCP-4.13
   ansible_playbook: /usr/share/dci-openshift-app-agent/dci-openshift-app-agent.yml
   ansible_cfg: ~/avu-dci-pipeline-test/pipelines/ansible.cfg
@@ -13,27 +12,29 @@
     dci_gits_to_components:
       - ~/avu-dci-pipeline-test
     dci_local_log_dir: ~/upload-errors
-    dci_tags: ["oneshot", "preflight", "step1"]
+    dci_tags: ["oneshot", "preflight", "helmchart", "helmchart-pr","two-images"]
     dci_workarounds: []
   
-    # docker auth and backend access
+    #docker auth and backend access
     partner_creds: "/var/lib/dci-openshift-app-agent/demo-auth.json"
     pyxis_apikey_path: "/var/lib/dci-openshift-app-agent/demo-pyxis-apikey.txt"
     
-    # reduce the job duration
     do_must_gather: false
     check_workload_api: false
+    preflight_run_health_check: false
 
-    # run preflight check container tests,
-    # create cert project, and submit tests results
+    organization_id: 15451045
+    page_size: 200
+
+    partner_name: "redhat-arkady-test"
+    partner_email: "redhat-arkady-test@redhat.com"
+    github_token_path: "/var/lib/dci-openshift-app-agent/github-token.txt"
+    #sandbox_repository: "ansvu/charts"
+
     preflight_containers_to_certify:
-      - container_image: "quay.io/avu0/demo4-nginx-ubi9:1-22"
-        create_container_project: true
-        short_description: "I am doing a full-automation e2e auto-publish for following image demo4-nginx-ubi9"
-        pyxis_product_lists:
-          - "6397a9d2aea4e1694b0fe1c4"
+      - container_image: "quay.io/avu0/demo1-nginx-ubi9:1-22"
+      #- container_image: "quay.io/avu0/demo2-nginx-ubi9:1-23"
 
-    # update the cert project for container
     cert_settings:
       # container
       auto_publish: true
@@ -46,7 +47,8 @@
       release_category: "Generally Available"
       repository_description: "This is a test repository for one-shot automaiton"
 
-  use_previous_topic: true
+  use_pevious_topic: true
   inputs:
     kubeconfig: kubeconfig_path
 ...
+

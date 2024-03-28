@@ -6,9 +6,11 @@
   ansible_cfg: ~/avu-dci-pipeline-test/pipelines/ansible.cfg
   ansible_inventory: ~/avu-dci-pipeline-test/inventories/@QUEUE/@RESOURCE-workload.yml
   dci_credentials: ~/.config/dci-pipeline/dci_credentials.yml
+  ansible_skip_tags:
+    - hook-post-run
   ansible_extravars:
     dci_cache_dir: ~/dci-cache-dir
-    dci_config_dir: ~/avu-dci-pipeline-test
+    dci_config_dir: ~/avu-dci-pipeline-test/ocp-workload
     dci_openshift_app_ns: testns
     dci_gits_to_components:
       - ~/avu-dci-pipeline-test
