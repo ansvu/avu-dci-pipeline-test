@@ -1,6 +1,6 @@
 ---
 - name: helmchart-verifier-report
-  stage: workerload
+  stage: workload
   topic: OCP-4.13
   ansible_playbook: /usr/share/dci-openshift-app-agent/dci-openshift-app-agent.yml
   ansible_cfg: ~/avu-dci-pipeline-test/pipelines/ansible.cfg
@@ -32,7 +32,7 @@
         deploy_chart: true
         create_pr: false
 
-  use_pevious_topic: true
+  use_previous_topic: true
   inputs:
     kubeconfig: kubeconfig_path
 ...
