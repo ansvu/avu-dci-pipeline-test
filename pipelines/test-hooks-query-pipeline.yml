@@ -8,7 +8,11 @@
   dci_credentials: ~/.config/dci-pipeline/dci_credentials.yml
   ansible_extravars:
     dci_cache_dir: ~/dci-cache-dir
+<<<<<<< HEAD
     dci_config_dir: ~/avu-dci-pipeline-test/ocp-workload
+=======
+    dci_config_dir: ~/avu-dci-pipeline-test
+>>>>>>> c53868b0fb3143841cc13a3fb89f71e24019d5e0
     dci_gits_to_components:
       - ~/avu-dci-pipeline-test
     dci_local_log_dir: ~/upload-errors
@@ -33,7 +37,11 @@
 
     preflight_containers_to_certify:
       - container_image: "quay.io/avu0/demo1-nginx-ubi9:1-22"
+<<<<<<< HEAD
       #- container_image: "quay.io/avu0/demo2-nginx-ubi9:1-23"
+=======
+      - container_image: "quay.io/avu0/demo2-nginx-ubi9:1-23"
+>>>>>>> c53868b0fb3143841cc13a3fb89f71e24019d5e0
 
     cert_settings:
       # container
