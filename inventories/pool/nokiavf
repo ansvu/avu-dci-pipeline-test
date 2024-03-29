@@ -1,8 +1,0 @@
----
-
-all:
-  hosts:
-    jumphost:
-      ansible_connection: local
-
-...

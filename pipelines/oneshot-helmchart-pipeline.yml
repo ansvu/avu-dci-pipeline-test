@@ -13,7 +13,7 @@
     dci_cache_dir: ~/dci-cache-dir
     dci_config_dir: ~/avu-dci-pipeline-test/ocp-workload
     dci_gits_to_components:
-      - ~/avu-dci-pipeline-test
+      - ~/avu-dci-pipeline-test/ocp-workload
     dci_local_log_dir: ~/upload-errors
     dci_tags: ["oneshot", "helmchart", "helmchart-pr", "step2"]
     dci_workarounds: []
@@ -31,12 +31,7 @@
     partner_name: "redhat-arkady-test"
     partner_email: "redhat-arkady-test@redhat.com"
     github_token_path: "/var/lib/dci-openshift-app-agent/github-token.txt"
-    sandbox_repository: "ansvu/charts"
-    dci_charts:
-      - name: finalchart
-        chart_file: https://ansvu.github.io/finalchart/finalchart-0.1.4.tgz
-        deploy_chart: true
-        create_pr: true
+    #sandbox_repository: "ansvu/charts"
 
     # create helmchart cert project at connect
     helmchart_to_certify:
@@ -45,7 +40,13 @@
         chart_name: "finalchart"
         create_helmchart_project: true
         pyxis_product_lists:
-          - "639b4bfd27b76af009e324cb"
+          - "6397a9d2aea4e1694b0fe1c4"
+
+    dci_charts:
+      - name: finalchart
+        chart_file: https://ansvu.github.io/finalchart/finalchart-0.1.4.tgz
+        deploy_chart: true
+        create_pr: true
 
     # update the cert project for helm chart
     cert_settings:

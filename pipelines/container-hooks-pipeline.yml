@@ -6,6 +6,8 @@
   ansible_cfg: ~/avu-dci-pipeline-test/pipelines/ansible.cfg
   ansible_inventory: ~/avu-dci-pipeline-test/inventories/@QUEUE/@RESOURCE-workload.yml
   dci_credentials: ~/.config/dci-pipeline/dci_credentials.yml
+  ansible_skip_tags:
+    - hook-post-run
   ansible_extravars:
     dci_cache_dir: ~/dci-cache-dir
     dci_config_dir: ~/avu-dci-pipeline-test #~/avu-dci-pipeline-test/ocp-workload
@@ -24,7 +26,6 @@
     check_workload_api: false
     page_size: 200
     pyxis_apikey_path: "/var/lib/dci-openshift-app-agent/demo-pyxis-apikey.txt"
-    #img_tag: "1-22"
     preflight_containers_to_certify:
       - container_image: "quay.io/avu0/demo1-nginx-ubi9:1-22"
         create_container_project: true
