@@ -1,8 +1,9 @@
 ---
 - name: Wait for all containers to be in the catalog
+  when: preflight_containers_to_certify is defined
   vars:
     current_container_image: "{{ c.container_image }}"
-  ansible.builtin.include_tasks: wait_for_container_published.yml
+  ansible.builtin.include_tasks: wait_for_one_container.yml #wait_for_container_published.yml
   loop: "{{ preflight_containers_to_certify }}"
   loop_control:
     loop_var: c
