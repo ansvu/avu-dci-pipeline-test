@@ -27,18 +27,19 @@ $ KUBECONFIG=$KUBECONFIG dci-pipeline-schedule helmchart-verifier-report
 
 Output:
 ```ShellSession
-$ oc -n oneshot get po -w
-NAME                                    READY   STATUS    RESTARTS   AGE
-finalchart-3h7v3xu07e-69cc977ff-lvqq9   0/1     Pending   0          0s
-finalchart-3h7v3xu07e-69cc977ff-lvqq9   0/1     Pending   0          0s
-finalchart-3h7v3xu07e-69cc977ff-lvqq9   0/1     Pending   0          0s
-finalchart-3h7v3xu07e-69cc977ff-lvqq9   0/1     ContainerCreating   0          0s
-finalchart-3h7v3xu07e-69cc977ff-lvqq9   0/1     ContainerCreating   0          1s
-finalchart-3h7v3xu07e-69cc977ff-lvqq9   1/1     Running             0          1s
-finalchart-3h7v3xu07e-69cc977ff-lvqq9   1/1     Terminating         0          2s
-finalchart-3h7v3xu07e-69cc977ff-lvqq9   0/1     Terminating         0          4s
-finalchart-3h7v3xu07e-69cc977ff-lvqq9   0/1     Terminating         0          4s
-finalchart-3h7v3xu07e-69cc977ff-lvqq9   0/1     Terminating         0          4s
+$ oc -n oneshot get pod -w
+NAME                                           READY   STATUS    RESTARTS   AGE
+yingoneshotchart-4jxey6xop3-756757844c-wv5s8   0/1     Pending   0          0s
+yingoneshotchart-4jxey6xop3-756757844c-wv5s8   0/1     Pending   0          0s
+yingoneshotchart-4jxey6xop3-756757844c-wv5s8   0/1     Pending   0          0s
+yingoneshotchart-4jxey6xop3-756757844c-wv5s8   0/1     ContainerCreating   0          0s
+yingoneshotchart-4jxey6xop3-756757844c-wv5s8   0/1     ContainerCreating   0          0s
+yingoneshotchart-4jxey6xop3-756757844c-wv5s8   1/1     Running             0          2s
+yingoneshotchart-4jxey6xop3-756757844c-wv5s8   1/1     Terminating         0          2s
+yingoneshotchart-4jxey6xop3-756757844c-wv5s8   0/1     Terminating         0          4s
+yingoneshotchart-4jxey6xop3-756757844c-wv5s8   0/1     Terminating         0          5s
+yingoneshotchart-4jxey6xop3-756757844c-wv5s8   0/1     Terminating         0          5s
+yingoneshotchart-4jxey6xop3-756757844c-wv5s8   0/1     Terminating         0          5s
 
 DCI CI Job(finalchart_0_report.yaml):
 https://www.distributed-ci.io/jobs/2433c2dd-cde4-40dd-9682-49ea9eef1132/files

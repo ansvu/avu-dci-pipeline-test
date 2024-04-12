@@ -1,7 +1,7 @@
 ---
 - name: create-openshift-cnf
   stage: workload
-  topic: OCP-4.13
+  topic: OCP-4.14
   ansible_playbook: /usr/share/dci-openshift-app-agent/dci-openshift-app-agent.yml
   ansible_cfg: ~/avu-dci-pipeline-test/pipelines/ansible.cfg
   ansible_inventory: ~/avu-dci-pipeline-test/inventories/@QUEUE/@RESOURCE-workload.yml
@@ -18,16 +18,17 @@
     #custom settings
     check_for_existing_projects: true
     organization_id: 15451045
+    page_size: 200
+
     do_must_gather: false
     check_workload_api: false
-    page_size: 200
     pyxis_apikey_path: "/var/lib/dci-openshift-app-agent/demo-pyxis-apikey.txt"
 
     cnf_to_certify:
-      - cnf_name: "YingCNF26.0 on OCP4.14"
+      - cnf_name: "YingOneShot0.1.5 on OCP4.14"
         create_cnf_project: true
         pyxis_product_lists:
-          - "639b4bfd27b76af009e324cb"
+          - "6397a9d2aea4e1694b0fe1c4"
 
     cert_settings:
       email_address: "email@example.com"          

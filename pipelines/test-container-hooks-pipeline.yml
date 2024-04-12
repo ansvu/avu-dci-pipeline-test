@@ -1,8 +1,7 @@
 ---
-- name: oneshot-container
+- name: test-container-hooks
   stage: container
-  prev_stages: [ocp-upgrade, ocp]
-  topic: OCP-4.14
+  topic: OCP-4.13
   ansible_playbook: /usr/share/dci-openshift-app-agent/dci-openshift-app-agent.yml
   ansible_cfg: ~/avu-dci-pipeline-test/pipelines/ansible.cfg
   ansible_inventory: ~/avu-dci-pipeline-test/inventories/@QUEUE/@RESOURCE-workload.yml
@@ -13,33 +12,29 @@
     dci_gits_to_components:
       - ~/avu-dci-pipeline-test
     dci_local_log_dir: ~/upload-errors
-    dci_tags: ["oneshot", "preflight", "step1"]
+    dci_tags: ["preflight","container","helmchart"]
     dci_workarounds: []
 
     organization_id: 15451045
     page_size: 200
-    
+  
     # docker auth and backend access
     partner_creds: "/var/lib/dci-openshift-app-agent/demo-auth.json"
     pyxis_apikey_path: "/var/lib/dci-openshift-app-agent/demo-pyxis-apikey.txt"
     
-    # reduce the job duration
     do_must_gather: false
     check_workload_api: false
 
-    # run preflight check container tests,
-    # create cert project, and submit tests results
     preflight_containers_to_certify:
-      - container_image: "quay.io/avu0/oneshot-demo2-nginx-ubi9:1-22"
+      - container_image: "quay.io/avu0/oneshot-demo1-nginx-ubi9:1-22"
         create_container_project: true
-        short_description: "I am doing a full-automation e2e auto-publish for following image oneshot-demo2-nginx-ubi9"
+        short_description: "I am doing a full-automation e2e auto-publish for following image demo4-nginx-ubi9"
         pyxis_product_lists:
           - "6397a9d2aea4e1694b0fe1c4"
 
-    # update the cert project for container
     cert_settings:
       # container
-      auto_publish: true
+      auto_publish: false
       build_categories: "Standalone image"
       registry_override_instruct: "These are instructions of how to override settings"
       email_address: "email@example.com"
