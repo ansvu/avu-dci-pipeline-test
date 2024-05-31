@@ -8,7 +8,7 @@
   ansible_inventory: ~/avu-dci-pipeline-test/inventories/@QUEUE/@RESOURCE-workload.yml
   dci_credentials: ~/.config/dci-pipeline/dci_credentials.yml
   ansible_skip_tags:
-    - hook-post-run 
+    - post-run 
   ansible_extravars:
     dci_cache_dir: ~/dci-cache-dir
     dci_config_dir: ~/avu-dci-pipeline-test/ocp-workload

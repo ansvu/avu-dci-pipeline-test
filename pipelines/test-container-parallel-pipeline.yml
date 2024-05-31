@@ -1,0 +1,61 @@
+---
+- name: test-container-parallel
+  stage: container
+  topic: OCP-4.14
+  ansible_playbook: /usr/share/dci-openshift-app-agent/dci-openshift-app-agent.yml
+  ansible_cfg: ~/avu-dci-pipeline-test/pipelines/ansible.cfg
+  ansible_inventory: ~/avu-dci-pipeline-test/inventories/@QUEUE/@RESOURCE-workload.yml
+  dci_credentials: ~/.config/dci-pipeline/dci_credentials.yml
+  ansible_skip_tags:
+    - post-run
+  ansible_extravars:
+    dci_cache_dir: ~/dci-cache-dir
+    dci_config_dir: ~/avu-dci-pipeline-test/ocp-workload
+    dci_gits_to_components:
+      - ~/avu-dci-pipeline-test
+    dci_local_log_dir: ~/upload-errors
+    dci_tags: ["no-submision","preflight","container","async", "no-parallel"]
+    dci_workarounds: []
+
+    organization_id: 15451045
+    page_size: 200
+  
+    # docker auth and backend access
+    partner_creds: "/var/lib/dci-openshift-app-agent/demo-auth.json"
+    pyxis_apikey_path: "/var/lib/dci-openshift-app-agent/demo-pyxis-apikey.txt"
+    
+    do_must_gather: false
+    check_workload_api: false
+    preflight_test_certified_image: true
+    preflight_run_health_check: false
+
+    # test container recertify in parallel
+    do_container_parallel_test: true
+    max_images_per_batch: 15
+
+    preflight_containers_to_certify:
+      - container_image: "quay.io/avu0/demo-parallel-x1:v1"
+      - container_image: "quay.io/avu0/demo-parallel-x2:v1"
+      - container_image: "quay.io/avu0/demo-parallel-x3:v1"
+      - container_image: "quay.io/avu0/demo-parallel-x4:v1"
+      - container_image: "quay.io/avu0/demo-parallel-x5:v1"
+      - container_image: "quay.io/avu0/demo-parallel-x6:v1"
+      - container_image: "quay.io/avu0/demo-parallel-x7:v1"
+      - container_image: "quay.io/avu0/demo-parallel-x8:v1"
+      - container_image: "quay.io/avu0/demo-parallel-x9:v1"
+      - container_image: "quay.io/avu0/demo-parallel-x10:v1"
+      - container_image: "quay.io/avu0/demo-parallel-x11:v1"
+      - container_image: "quay.io/avu0/demo-parallel-x12:v1"
+      - container_image: "quay.io/avu0/demo-parallel-x13:v1"
+      - container_image: "quay.io/avu0/demo-parallel-x14:v1"
+      - container_image: "quay.io/avu0/demo-parallel-x15:v1"
+      - container_image: "quay.io/avu0/demo-parallel-x16:v1"
+      - container_image: "quay.io/avu0/demo-parallel-x17:v1"
+      - container_image: "quay.io/avu0/demo-parallel-x18:v1"
+      - container_image: "quay.io/avu0/demo-parallel-x19:v1"
+      - container_image: "quay.io/avu0/demo-parallel-x20:v1"  
+
+  use_previous_topic: true
+  inputs:
+    kubeconfig: kubeconfig_path
+...

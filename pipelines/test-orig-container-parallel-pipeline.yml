@@ -1,0 +1,51 @@
+---
+- name: test-container-parallel
+  stage: container
+  topic: OCP-4.14
+  ansible_playbook: /usr/share/dci-openshift-app-agent/dci-openshift-app-agent.yml
+  ansible_cfg: ~/avu-dci-pipeline-test/pipelines/ansible.cfg
+  ansible_inventory: ~/avu-dci-pipeline-test/inventories/@QUEUE/@RESOURCE-workload.yml
+  dci_credentials: ~/.config/dci-pipeline/dci_credentials.yml
+  ansible_skip_tags:
+    - post-run
+  ansible_extravars:
+    dci_cache_dir: ~/dci-cache-dir
+    dci_config_dir: ~/avu-dci-pipeline-test/ocp-workload
+    dci_gits_to_components:
+      - ~/avu-dci-pipeline-test
+    dci_local_log_dir: ~/upload-errors
+    dci_tags: ["preflight","container","async", "parallel"]
+    dci_workarounds: []
+
+    organization_id: 15451045
+    page_size: 200
+  
+    # docker auth and backend access
+    partner_creds: "/var/lib/dci-openshift-app-agent/demo-auth.json"
+    pyxis_apikey_path: "/var/lib/dci-openshift-app-agent/demo-pyxis-apikey.txt"
+    
+    do_must_gather: false
+    check_workload_api: false
+    preflight_test_certified_image: true
+    preflight_run_health_check: false
+
+    # test container recertify in parallel
+    do_container_parallel: true
+    max_images_per_batch: 3
+
+    preflight_containers_to_certify:
+      - container_image: "quay.io/avu0/demo-parallel-x1:v1"
+        pyxis_container_identifier: "66435917d49dec8f49f0f006"
+      - container_image: "quay.io/avu0/demo1-nginx-ubi9:1-22"
+        pyxis_container_identifier: "65f982067e146e60a1fef87f"
+      - container_image: "quay.io/avu0/demo2-nginx-ubi9:1-22"
+        pyxis_container_identifier: "65b1b1d1a3d7788c9d874521"
+      - container_image: "quay.io/avu0/demo3-nginx-ubi9:1-22"
+        pyxis_container_identifier: "65f982a1f59e803922cbd3d2"
+      - container_image: "quay.io/avu0/demo5-nginx-ubi9:1-22"
+        pyxis_container_identifier: "663d4dc2601da16bedc8885d"
+
+  use_previous_topic: true
+  inputs:
+    kubeconfig: kubeconfig_path
+...
